@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .mw-8 {
+      max-width: 80%;
+    }
+
+    button {
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      text-align: center;
+      display: inline-block;
+      font-size: 10px;
+      margin: 4px 2px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .btn-g {
+      background-color: #1abc9c;
+    }
+
+    .btn-b {
+      background-color: #3498db;
+    }
+
+    .btn-r {
+      background-color: #ff6b81;
+    }
+
+    .btn-d {
+      background-color: #57606f;
+    }
+
+    .disable {
+      background: #a4b0be;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    select {
+      width: 200px;
+      height: 24px;
+      border-radius: 4px;
+      background: #f5f5f5;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <button class="btn-g" onClick="takePhoto()">拍照</button>
+    <button class="btn-b start" onClick="recordVideo()">录像</button>
+    <button class="btn-b stop disable" onClick="stopVideo()">停止</button>
+    <button class="btn-r " onClick="exit()">悬浮</button>
+    <select class="choice"></select>
+    <button class="btn-d" onClick="chVideo()">切换</button>
+  </div>
+  <a href="" target="_blank" download="" style="display:none;">保存</a>
+  <video class="show mw-8"></video>
+  <script src="video.js"></script>
+</body>
+
+</html>
