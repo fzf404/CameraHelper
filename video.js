@@ -38,7 +38,7 @@ let showVideo = () => {
       };
     })
     .catch(err => {
-      console.log(err.name + ": " + err.message);
+      console.log(`${err.name}:${err.message}`);
     });
 }
 
@@ -67,12 +67,10 @@ let takePhoto = () => {
   //将canvas图像转换为base64字符串，设置格式以及压缩比例
   let image = canvas.toDataURL('image/jpeg', 90 / 100);
 
-  //显示图片
-  // document.querySelector('.photo').src = image;
-
   // 下载标签更新并点击
   recordLabel.href = image;
   recordLabel.click();
+  return image
 }
 
 // 录像
@@ -98,7 +96,7 @@ let recordVideo = () => {
 
     })
     .catch(err => {
-      console.log(err.name + ": " + err.message);
+      console.log(`${err.name}:${err.message}`);
     });
 }
 
@@ -116,8 +114,11 @@ let stopVideo = () => {
   )
 }
 
-let exit = ()=>{
+// 退出
+let exit = () => {
   window.utools.outPlugin();
 }
+
+// 执行
 getMedia();
 showVideo();
