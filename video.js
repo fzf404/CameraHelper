@@ -117,20 +117,22 @@ let stopVideo = () => {
 
 // 悬浮
 function suspend() {
+  // 传入摄像头id
+  localStorage.setItem('mediaKey', choiceLabel.value);
   utools.createBrowserWindow('suspend.html', {
-      title: 'camera',
-      width: parseInt(showLabel.videoWidth),
-      height: parseInt(showLabel.videoHeight),
-      useContentSize: true,
-      //不能最大最小化
-      minimizable: false,
-      maximizable: false,
-      fullscreenable: false,
-      //背景透明，防止放大缩小时出现白框
-      transparent: true,
-      backgroundColor: '#00000000',
-      frame: false,
-      alwaysOnTop: true,
+    title: 'camera',
+    width: parseInt(showLabel.videoWidth),
+    height: parseInt(showLabel.videoHeight),
+    useContentSize: true,
+    //不能最大最小化
+    minimizable: false,
+    maximizable: false,
+    fullscreenable: false,
+    //背景透明，防止放大缩小时出现白框
+    transparent: true,
+    backgroundColor: '#00000000',
+    frame: false,
+    alwaysOnTop: true,
   });
 }
 
