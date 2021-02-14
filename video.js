@@ -12,6 +12,7 @@ let showOpt = {
   video: true,
 };
 let flag = true;
+let hasMedia = false;
 
 // 获取媒体设备列表
 let getMedia = () => {
@@ -22,8 +23,12 @@ let getMedia = () => {
         if (device.kind === "videoinput") {
           // 增加select标签
           choiceLabel.insertAdjacentHTML('beforeend', `<option value="${device.deviceId}">${device.label}</option>`);
+          hasMedia = true;
         }
       });
+      if(hasMedia == false){
+        alert('没有找到相机设备');
+      }
     }).catch(err => {
       console.log(`${err.name}:${err.message}`);
     })
@@ -138,7 +143,6 @@ function suspend() {
 
 // 启动
 let start = () => {
-  getMedia();
   showVideo();
   flag = true;
 }
@@ -150,9 +154,10 @@ let exit = () => {
       v.stop();
     })
     flag = false;
-    return
+    return;
   }
   start();
 }
 
-start()
+getMedia();
+start();
