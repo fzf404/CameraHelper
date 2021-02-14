@@ -11,6 +11,7 @@ let showOpt = {
   audio: false,
   video: true,
 };
+let flag = true;
 
 // 获取媒体设备列表
 let getMedia = () => {
@@ -114,11 +115,42 @@ let stopVideo = () => {
   )
 }
 
-// 退出
-let exit = () => {
-  window.utools.outPlugin();
+// 悬浮
+function suspend() {
+  utools.createBrowserWindow('suspend.html', {
+      title: 'camera',
+      width: parseInt(showLabel.videoWidth),
+      height: parseInt(showLabel.videoHeight),
+      useContentSize: true,
+      //不能最大最小化
+      minimizable: false,
+      maximizable: false,
+      fullscreenable: false,
+      //背景透明，防止放大缩小时出现白框
+      transparent: true,
+      backgroundColor: '#00000000',
+      frame: false,
+      alwaysOnTop: true,
+  });
 }
 
-// 执行
-getMedia();
-showVideo();
+// 启动
+let start = () => {
+  getMedia();
+  showVideo();
+  flag = true;
+}
+
+// 退出
+let exit = () => {
+  if (flag == true) {
+    showLabel.srcObject.getTracks().forEach((v) => {
+      v.stop();
+    })
+    flag = false;
+    return
+  }
+  start();
+}
+
+start()
