@@ -1,9 +1,12 @@
 let showLabel = document.querySelector('.show');
-let showWidth = 100;
+// 默认窗口大小
+let showWidth = 50;
+// 相机id
 let showOpt = {
   audio: false,
   video: {
     optional: [{
+      // 获取参数
       sourceId: localStorage['mediaKey']
     }]
   },
@@ -23,6 +26,7 @@ let showVideo = () => {
 }
 
 showVideo();
+// 监听按键
 document.addEventListener("keydown", event => {
   switch (event.key) {
     case "Escape":
