@@ -34,13 +34,13 @@ document.addEventListener("keydown", event => {
       break;
     case "-":
       if (showWidth > 20) {
-        showWidth -= 10;
+        showWidth -= 5;
       }
       showLabel.style.width = `${showWidth}vw`;
       break;
     case "=":
       if (showWidth < 100) { 
-        showWidth += 10;
+        showWidth += 5;
       }
       showLabel.style.width = `${showWidth}vw`;
       break;
