@@ -4,7 +4,7 @@
 >
 > [项目地址](https://github.com/fzf404/CameraHelper)
 
-![image-20210214111056605](https://gitee.com/nmdfzf404/Image-hosting/raw/master/2021/image-20210214111056605.png)
+![image-20210921203322939](https://gitee.com/nmdfzf404/Image-hosting/raw/master/2021/202109212033181.png)
 
 ## ✨特性
 

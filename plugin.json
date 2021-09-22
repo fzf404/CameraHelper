@@ -1,16 +1,20 @@
 {
-	"pluginName": "相机助手",
+	"pluginName": "摄像头助手",
 	"description": "PC摄像头助手",
 	"author": "fzf404",
-	"homepage": "https://fzf404.top",
+	"homepage": "https://www.fzf404.top",
 	"main": "index.html",
 	"version": "1.0.1",
-  "logo": "camera.png",
+	"logo": "camera.png",
 	"features": [
 		{
-		  "code": "camera",
-		  "explain": "相机助手",
-			"cmds":["camera", "相机","相机助手"]
+			"code": "camera",
+			"explain": "相机助手",
+			"cmds": [
+				"camera",
+				"摄像头",
+				"摄像头助手"
+			]
 		}
 	]
 }

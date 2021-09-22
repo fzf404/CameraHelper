@@ -26,6 +26,7 @@ let showVideo = () => {
 }
 
 showVideo();
+
 // 监听按键
 document.addEventListener("keydown", event => {
   switch (event.key) {
