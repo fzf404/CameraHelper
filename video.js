@@ -5,7 +5,9 @@ let choiceLabel = document.querySelector('.choice');
 // 拍照绘图
 let canvas = document.createElement('canvas');
 let context = canvas.getContext('2d');
+// 录像
 let recorder;
+
 // 默认配置
 let showOpt = {
   audio: false,
@@ -154,9 +156,9 @@ let exit = () => {
       v.stop();
     })
     flag = false;
-    return;
+  } else {
+    start();
   }
-  start();
 }
 
 getMedia();
