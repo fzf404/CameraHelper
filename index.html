@@ -1,81 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CameraHelper</title>
+    <style>
+      .container {
+        max-width: 100%;
+      }
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CameraHelper</title>
-  <style>
-    .container {
-      max-width: 100%;
-    }
+      .fr {
+        float: right;
+      }
 
-    .fr {
-      float: right;
-    }
+      .mw {
+        max-width: 100%;
+      }
 
-    .mw {
-      max-width: 100%;
-    }
+      button {
+        border: none;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        display: inline-block;
+        font-size: 12px;
+        margin: 6px 2px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
 
-    button {
-      border: none;
-      color: white;
-      padding: 8px 16px;
-      text-align: center;
-      display: inline-block;
-      font-size: 12px;
-      margin: 6px 2px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+      select {
+        width: 200px;
+        height: 24px;
+        border-radius: 4px;
+        background: #f5f5f5;
+      }
 
-    .btn-g {
-      background-color: #1abc9c;
-    }
+      .btn-g {
+        background-color: #1abc9c;
+      }
 
-    .btn-b {
-      background-color: #3498db;
-    }
+      .btn-b {
+        background-color: #3498db;
+      }
 
-    .btn-r {
-      background-color: #ff6b81;
-    }
+      .btn-o {
+        background-color: #e67e22;
+      }
 
-    .btn-d {
-      background-color: #57606f;
-    }
+      .btn-p {
+        background-color: #9b59b6;
+      }
 
-    .disable {
-      background: #a4b0be;
-      cursor: not-allowed;
-      pointer-events: none;
-    }
+      .btn-r {
+        background-color: #ff6b81;
+      }
 
-    select {
-      width: 200px;
-      height: 24px;
-      border-radius: 4px;
-      background: #f5f5f5;
-    }
-  </style>
-</head>
+      .btn-d {
+        background-color: #57606f;
+      }
 
-<body>
-  <div class="container">
-    <div>
-      <button class="btn-g" onClick="takePhoto()">拍照</button>
-      <button class="btn-b start" onClick="recordVideo()">录像</button>
-      <button class="btn-b stop disable" onClick="stopVideo()">停止</button>
-      <button class="btn-r " onClick="suspend()">悬浮</button>
-      <select class="choice"></select>
-      <button class="btn-d" onClick="chVideo()">切换</button>
-      <button class="btn-r fr" onClick="exit()">解除/恢复占用</button>
+      .disable {
+        background: #a4b0be;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
+      .mirror {
+        transform: rotateY(180deg);
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <div>
+        <button class="btn-g" onClick="takePhoto()">拍照</button>
+        <button id="record" class="btn-b" onClick="startRecord()">录像</button>
+        <button class="btn-r" onClick="mirrorVideo()">镜像</button>
+        <button class="btn-p" onClick="suspend()">悬浮</button>
+        <select id="choice"></select>
+        <button class="btn-d" onClick="chVideo()">切换</button>
+        <button class="btn-r fr" onClick="exit()">解除/恢复占用</button>
+      </div>
+      <a id="download" href="" target="_blank" download="" style="display: none">保存</a>
+      <video id="video" class="mw"></video>
     </div>
-    <a href="" target="_blank" download="" style="display:none;">保存</a>
-    <video class="show mw"></video>
-  </div>
-  <script src="video.js"></script>
-</body>
-
+    <script src="video.js"></script>
+  </body>
 </html>
