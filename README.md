@@ -4,9 +4,8 @@
 > 
 > uTools 插件市场搜索 `摄像头助手`
 > 
-> 适用于 win / Linux 
+> 适用于 win / linux 
 
-![image-20210921203322939](https://gitee.com/nmdfzf404/Image-hosting/raw/master/2021/202109212033181.png)
 
 ## ✨ 特性
 
