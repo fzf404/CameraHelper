@@ -6,19 +6,14 @@
     <style>
       body {
         -webkit-app-region: drag;
-        -webkit-user-select: none;
+        user-select: none;
+
         margin: 0px;
         width: 100%;
         height: 100%;
         overflow: hidden;
         overflow-x: hidden;
         overflow-y: hidden;
-        opacity: 1;
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-      }
-
-      body:hover {
-        opacity: 0.8;
       }
 
       video {
@@ -29,11 +24,10 @@
       .mirror {
         transform: rotateY(180deg);
       }
-
     </style>
   </head>
 
-  <body scroll="no">
+  <body>
     <video id="video" class="show"></video>
     <script src="suspend.js"></script>
   </body>

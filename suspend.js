@@ -1,58 +1,58 @@
-let showLabel = document.getElementById("video");
+// video 元素
+const videoElement = document.getElementById('video')
 
-// 默认窗口大小
-let showWidth = 50;
+// video 大小百分比
+let videoWidth = 50
 
-// 是否镜像
-localStorage["mirror"] == "true" ? showLabel.classList.add("mirror") : null;
+// mirror 开启
+if (localStorage['mirror'] == 'true') {
+  videoElement.classList.add('mirror')
+}
 
-// 相机id
-let showOpt = {
+// camera 选项
+let cameraOption = {
   audio: false,
   video: {
     optional: [
       {
         // 获取参数
-        sourceId: localStorage["mediaKey"],
+        sourceId: localStorage['media'],
       },
     ],
   },
-};
+}
 
-// 展示
-let showVideo = () => {
-  navigator.mediaDevices
-    .getUserMedia(showOpt)
-    .then((mediaStream) => {
-      showLabel.srcObject = mediaStream;
-      showLabel.onloadedmetadata = (e) => {
-        showLabel.play();
-      };
-    })
-    .catch((err) => {
-      console.log(`${err.name}:${err.message}`);
-    });
-};
-
-showVideo();
+// 读取设备
+navigator.mediaDevices
+  .getUserMedia(cameraOption)
+  .then((mediaStream) => {
+    // 写入 video
+    videoElement.srcObject = mediaStream
+    videoElement.onloadedmetadata = (e) => {
+      videoElement.play()
+    }
+  })
+  .catch((err) => {
+    alert(`摄像头读取失败：${err.message}`)
+  })
 
 // 监听按键
-document.addEventListener("keydown", (event) => {
+document.addEventListener('keydown', (event) => {
   switch (event.key) {
-    case "Escape":
-      window.close();
-      break;
-    case "-":
-      if (showWidth > 20) {
-        showWidth -= 5;
+    case 'Escape': // esc 退出
+      window.close()
+      break
+    case '-': // - 缩小
+      if (videoWidth > 20) {
+        videoWidth -= 5
       }
-      showLabel.style.width = `${showWidth}vw`;
-      break;
-    case "=":
-      if (showWidth < 100) {
-        showWidth += 5;
+      videoElement.style.width = `${videoWidth}vw`
+      break
+    case '=': // = 放大
+      if (videoWidth < 100) {
+        videoWidth += 5
       }
-      showLabel.style.width = `${showWidth}vw`;
-      break;
+      videoElement.style.width = `${videoWidth}vw`
+      break
   }
-});
+})

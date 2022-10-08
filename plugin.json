@@ -1,21 +1,17 @@
 {
-	"version": "1.0.3",
-	"pluginName": "摄像头助手",
-	"description": "PC摄像头助手",
-	"author": "fzf404",
-	"homepage": "https://github.com/fzf404/CameraHelper",
-	"logo": "camera.png",
-	"features": [
-		{
-			"code": "camera",
-			"explain": "摄像头助手",
-			"cmds": [
-				"camera",
-				"摄像头",
-				"摄像头助手"
-			]
-		}
-	],
-	"main": "index.html",
-	"platform": ["win32", "linux"]
+  "version": "1.1.0",
+  "author": "fzf404",
+  "logo": "camera.png",
+  "main": "camera.html",
+  "pluginName": "相机助手",
+  "description": "用于控制相机的小助手",
+  "platform": ["win32", "linux"],
+  "homepage": "https://github.com/fzf404/CameraHelper",
+  "features": [
+    {
+      "code": "camera",
+      "explain": "相机助手",
+      "cmds": ["camera", "相机", "相机助手"]
+    }
+  ]
 }

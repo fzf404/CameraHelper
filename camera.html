@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <title>CameraHelper</title>
@@ -12,20 +12,18 @@
         float: right;
       }
 
-      .mw {
-        max-width: 100%;
-      }
-
       button {
-        border: none;
         color: white;
-        padding: 8px 16px;
-        text-align: center;
-        display: inline-block;
         font-size: 12px;
+        text-align: center;
+
+        display: inline-block;
+        cursor: pointer;
+
+        border: none;
+        padding: 8px 16px;
         margin: 6px 2px;
         border-radius: 4px;
-        cursor: pointer;
       }
 
       select {
@@ -69,23 +67,26 @@
         transform: rotateY(180deg);
       }
 
+      .hidden {
+        display: none;
+      }
     </style>
   </head>
 
   <body>
-    <div class="container">
-      <div>
-        <button class="btn-g" onClick="takePhoto()">拍照</button>
+    <main class="container">
+      <nav>
+        <button id="photo" class="btn-g" onClick="takePhoto()">拍照</button>
         <button id="record" class="btn-b" onClick="startRecord()">录像</button>
-        <button class="btn-r" onClick="mirrorVideo()">镜像</button>
-        <button class="btn-p" onClick="suspend()">悬浮</button>
+        <button id="mirror" class="btn-r" onClick="mirrorVideo()">镜像</button>
+        <button id="suspend" class="btn-p" onClick="suspendVideo()">悬浮</button>
         <select id="choice"></select>
-        <button class="btn-d" onClick="chVideo()">切换</button>
-        <button class="btn-r fr" onClick="exit()">解除/恢复占用</button>
-      </div>
-      <a id="download" href="" target="_blank" download="" style="display: none">保存</a>
-      <video id="video" class="mw"></video>
-    </div>
-    <script src="video.js"></script>
+        <button id="change" class="btn-d" onClick="changeMedia()">切换</button>
+        <button id="exit" class="fr btn-r" onClick="exit()">解除/恢复占用</button>
+      </nav>
+      <video id="video" class="container"></video>
+      <a id="download" class="hidden">保存</a>
+    </main>
+    <script src="camera.js"></script>
   </body>
 </html>
