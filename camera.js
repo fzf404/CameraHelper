@@ -69,7 +69,6 @@ const showVideo = () => {
       alert(`设备启动失败：${err.message}`)
     })
 }
-showVideo()
 
 // 切换相机
 const changeMedia = () => {
@@ -125,7 +124,7 @@ const startRecord = () => {
       }
       // 销毁
       recorder.onstop = () => {
-        stream.getTracks().forEach((track) => track.stop())
+        mediaStream.getTracks().forEach((track) => track.stop())
       }
       // 开始
       recorder.start()
