@@ -41,12 +41,12 @@ if (localStorage['mirror'] == 'true') {
   Elements.video.classList.add('mirror')
 }
 
-// 读取设备
+// 读取媒体设备
 navigator.mediaDevices
   .getUserMedia(Media.option)
   .then((stream) => {
     Elements.video.srcObject = stream
   })
   .catch((err) => {
-    alert(`摄像头读取失败：${err.message}`)
+    alert(`媒体设备读取失败：${err.message}`)
   })

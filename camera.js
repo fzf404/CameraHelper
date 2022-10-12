@@ -76,7 +76,7 @@ Elements.record.addEventListener('click', () => {
       Elements.stop.classList.remove('hidden')
     })
     .catch((err) => {
-      alert(`设备录制失败：${err.message}`)
+      alert(`媒体设备录制失败：${err.message}`)
     })
 })
 
@@ -113,7 +113,7 @@ Elements.suspend.addEventListener('click', () => {
   })
 })
 
-// 切换
+// 切换媒体设备
 Elements.change.addEventListener('click', () => {
   localStorage.setItem('media', Elements.choice.value)
   StartMedia()
@@ -156,7 +156,7 @@ const InitMedia = () => {
       }
     })
     .catch((err) => {
-      alert(`设备读取失败：${err.message}`)
+      alert(`媒体设备读取失败：${err.message}`)
     })
 }
 
@@ -167,7 +167,7 @@ const StartMedia = () => {
 
   // 媒体设备
   if (localStorage.media) {
-    // 选择设备
+    // 选择媒体设备
     Media.option.video = {
       optional: [
         {
@@ -185,7 +185,7 @@ const StartMedia = () => {
       Elements.video.srcObject = media
     })
     .catch((err) => {
-      alert(`设备启动失败：${err.message}`)
+      alert(`媒体设备启动失败：${err.message}`)
     })
 }
 
@@ -196,5 +196,7 @@ const stopMedia = () => {
   })
 }
 
+// 初始化媒体设备
 InitMedia()
+// 开启媒体设备
 StartMedia()
