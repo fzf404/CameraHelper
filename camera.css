@@ -32,24 +32,48 @@ select {
   background-color: #1abc9c;
 }
 
+.btn-g:hover {
+  background-color: #16a085;
+}
+
 .btn-b {
   background-color: #3498db;
+}
+
+.btn-b:hover {
+  background-color: #2980b9;
 }
 
 .btn-o {
   background-color: #e67e22;
 }
 
+.btn-o:hover {
+  background-color: #d35400;
+}
+
 .btn-p {
   background-color: #9b59b6;
+}
+
+.btn-p:hover {
+  background-color: #8e44ad;
 }
 
 .btn-r {
   background-color: #ff6b81;
 }
 
+.btn-r:hover {
+  background-color: #ff4757;
+}
+
 .btn-d {
-  background-color: #57606f;
+  background-color: #34495e;
+}
+
+.btn-d:hover {
+  background-color: #2f3542;
 }
 
 .disable {

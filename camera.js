@@ -151,7 +151,9 @@ const InitMedia = () => {
         }
       })
       // 设置选项
-      Elements.choice.value = localStorage.media
+      if (localStorage.media) {
+        Elements.choice.value = localStorage.media
+      }
     })
     .catch((err) => {
       alert(`设备读取失败：${err.message}`)
