@@ -32,16 +32,16 @@ const Media = {
 // 拍照
 Elements.photo.addEventListener('click', () => {
   // 图像大小
-  canvasElement.width = videoElement.videoWidth
-  canvasElement.height = videoElement.videoHeight
+  Elements.canvas.width = Elements.video.videoWidth
+  Elements.canvas.height = Elements.video.videoHeight
 
   // 绘制
-  canvasContext.drawImage(videoElement, 0, 0)
+  Elements.canvas.getContext('2d').drawImage(Elements.video, 0, 0)
 
   // 下载
-  downloadElement.href = canvasElement.toDataURL('image/jpeg')
-  downloadElement.download = `photo-${new Date().toLocaleString().replace(/[/: ]/gi, '-')}.jpeg`
-  downloadElement.click()
+  Elements.download.href = Elements.canvas.toDataURL('image/jpeg')
+  Elements.download.download = `photo-${new Date().toLocaleString().replace(/[/: ]/gi, '-')}.jpeg`
+  Elements.download.click()
 })
 
 // 录像
@@ -58,8 +58,9 @@ Elements.record.addEventListener('click', () => {
 
       // 下载
       Media.record.ondataavailable = (e) => {
-        downloadElement.href = URL.createObjectURL(e.data)
-        downloadElement.download = `video-${new Date().toLocaleString().replace(/[/: ]/gi, '-')}.webm`
+        Elements.download.href = URL.createObjectURL(e.data)
+        Elements.download.download = `video-${new Date().toLocaleString().replace(/[/: ]/gi, '-')}.webm`
+        Elements.download.click()
       }
 
       // 销毁
@@ -85,21 +86,20 @@ Elements.stop.addEventListener('click', () => {
   Media.record.stop()
 
   // 更换按钮
-  Elements.record.classList.add('hidden')
-  Elements.stop.classList.remove('hidden')
+  Elements.stop.classList.add('hidden')
+  Elements.record.classList.remove('hidden')
 })
 
 // 镜像
-Elements.mirror.addEventListener('mirror', () => {
-  localStorage['mirror'] = videoElement.classList.toggle('mirror')
+Elements.mirror.addEventListener('click', () => {
+  localStorage['mirror'] = Elements.video.classList.toggle('mirror')
 })
 
 // 悬浮
 Elements.suspend.addEventListener('click', () => {
   utools.createBrowserWindow('suspend.html', {
     title: 'suspend',
-    width: videoElement.videoWidth,
-    height: videoElement.videoHeight,
+    // 使用内容大小
     useContentSize: true,
     // 阻止最大化、最小化、全屏
     minimizable: false,
@@ -116,33 +116,56 @@ Elements.suspend.addEventListener('click', () => {
 // 切换
 Elements.change.addEventListener('click', () => {
   localStorage.setItem('media', Elements.choice.value)
-  InitMedia()
+  StartMedia()
 })
 
 // 解除占用
 Elements.remove.addEventListener('click', () => {
-  Elements.video.srcObject.getTracks().forEach((v) => {
-    v.stop()
-  })
   Elements.remove.classList.add('hidden')
   Elements.resume.classList.remove('hidden')
+  stopMedia()
 })
 
 // 恢复占用
-Elements.remove.addEventListener('click', () => {
+Elements.resume.addEventListener('click', () => {
   Elements.resume.classList.add('hidden')
   Elements.remove.classList.remove('hidden')
-  InitMedia()
+  StartMedia()
 })
 
+// 初始化媒体设备
 const InitMedia = () => {
   // 镜像状态
   if (localStorage.mirror == 'true') {
     Elements.video.classList.add('mirror')
   }
 
+  // 读取设备列表
+  navigator.mediaDevices
+    .enumerateDevices()
+    .then((devices) => {
+      devices.forEach((device) => {
+        // 增加 select 标签
+        if (device.kind === 'videoinput') {
+          Elements.choice.add(new Option(device.label, device.deviceId))
+        }
+      })
+      // 设置选项
+      Elements.choice.value = localStorage.media
+    })
+    .catch((err) => {
+      alert(`设备读取失败：${err.message}`)
+    })
+}
+
+// 启动媒体设备
+const StartMedia = () => {
+  // 关闭音频
+  Media.option.audio = false
+
   // 媒体设备
   if (localStorage.media) {
+    // 选择设备
     Media.option.video = {
       optional: [
         {
@@ -152,39 +175,24 @@ const InitMedia = () => {
     }
   }
 
-  // 关闭音频
-  Media.audio = false
-
-  // 读取设备列表
-  navigator.mediaDevices
-    .enumerateDevices()
-    .then((devices) => {
-      devices.forEach((device) => {
-        // 增加 select 标签
-        if (device.kind === 'videoinput') {
-          choiceElement.insertAdjacentHTML('beforeend', `<option value="${device.deviceId}">${device.label}</option>`)
-        }
-      })
-    })
-    .catch((err) => {
-      alert(`设备读取失败：${err.message}`)
-    })
-
   // 初始化媒体设备
   navigator.mediaDevices
     .getUserMedia(Media.option)
     .then((media) => {
       // 写入流
-      videoElement.srcObject = media
-      // 自动播放
-      videoElement.onloadedmetadata = () => {
-        mediaStart = true
-        videoElement.play()
-      }
+      Elements.video.srcObject = media
     })
     .catch((err) => {
       alert(`设备启动失败：${err.message}`)
     })
 }
 
+// 关闭媒体设备
+const stopMedia = () => {
+  Elements.video.srcObject.getTracks().forEach((v) => {
+    v.stop()
+  })
+}
+
 InitMedia()
+StartMedia()
