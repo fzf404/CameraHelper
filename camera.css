@@ -1,0 +1,67 @@
+.container {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.fr {
+  float: right;
+}
+
+button {
+  color: white;
+  font-size: 12px;
+  text-align: center;
+
+  display: inline-block;
+  cursor: pointer;
+
+  border: none;
+  padding: 8px 16px;
+  margin: 6px 2px;
+  border-radius: 4px;
+}
+
+select {
+  width: 200px;
+  height: 24px;
+  border-radius: 4px;
+  background: #f5f5f5;
+}
+
+.btn-g {
+  background-color: #1abc9c;
+}
+
+.btn-b {
+  background-color: #3498db;
+}
+
+.btn-o {
+  background-color: #e67e22;
+}
+
+.btn-p {
+  background-color: #9b59b6;
+}
+
+.btn-r {
+  background-color: #ff6b81;
+}
+
+.btn-d {
+  background-color: #57606f;
+}
+
+.disable {
+  background: #a4b0be;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.mirror {
+  transform: rotateY(180deg);
+}
+
+.hidden {
+  display: none;
+}

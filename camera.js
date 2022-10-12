@@ -1,30 +1,34 @@
-// 获取元素
-const videoElement = document.getElementById('video') // 视频
-const downloadElement = document.getElementById('download') // 下载
-const choiceElement = document.getElementById('choice') // 相机选择
-const recordElement = document.getElementById('record') // 录像按钮
-
-// 拍照绘图
-const canvas = document.createElement('canvas')
-const context = canvas.getContext('2d')
-
-let recorder, // 录制对象
-  mediaStart = false // 是否开启设备
-
-// 媒体配置
-let mediaOption = {
-  video: true,
-  audio: false,
+// DOM 元素
+const Element = {
+  photo: document.getElementById('photo'), // 拍照
+  record: document.getElementById('record'), // 录制
+  mirror: document.getElementById('mirror'), // 镜像
+  suspend: document.getElementById('suspend'), // 悬浮
+  choice: document.getElementById('choice'), // 选择
+  toggle: document.getElementById('toggle'), // 开关
+  canvas: document.getElementById('canvas'), // 绘制
+  video: document.getElementById('video'), // 视频
+  download: document.getElementById('download'), // 下载
 }
 
-// 获取镜像状态
+// Media 选项
+const Media = {
+  start: false, // 是否启动
+  record: null, // 记录对象
+  option: {
+    video: true, // 开启视频
+    audio: false, // 关闭音频
+  },
+}
+
+// 镜像状态
 if (localStorage['mirror'] == 'true') {
   videoElement.classList.add('mirror')
 }
 
-// 获取媒体设备
+// 媒体设备
 if (localStorage['media']) {
-  mediaOption = {
+  Media.option = {
     video: {
       optional: [
         {
@@ -56,9 +60,9 @@ navigator.mediaDevices
 const showVideo = () => {
   navigator.mediaDevices
     .getUserMedia(mediaOption)
-    .then((mediaStream) => {
+    .then((media) => {
       // 写入流
-      videoElement.srcObject = mediaStream
+      videoElement.srcObject = media
       // 自动播放
       videoElement.onloadedmetadata = () => {
         mediaStart = true
@@ -91,13 +95,13 @@ const changeMedia = () => {
 
 // 拍照
 const takePhoto = () => {
-  //创建 canvas 标签
-  canvas.width = videoElement.videoWidth
-  canvas.height = videoElement.videoHeight
-  // 利用 canvas 画图
-  context.drawImage(videoElement, 0, 0)
+  //创建 canvasElement 标签
+  canvasElement.width = videoElement.videoWidth
+  canvasElement.height = videoElement.videoHeight
+  // 利用 canvasElement 画图
+  canvasContext.drawImage(videoElement, 0, 0)
   // 生成图片
-  let image = canvas.toDataURL('image/jpeg')
+  let image = canvasElement.toDataURL('image/jpeg')
   // 下载
   downloadElement.href = image
   downloadElement.download = `camera-photo-${new Date().toLocaleString().replace(/[/: ]/gi, '-')}.jpeg`
@@ -114,20 +118,20 @@ const startRecord = () => {
   // 获取音视频流
   navigator.mediaDevices
     .getUserMedia(recordOption)
-    .then((mediaStream) => {
+    .then((media) => {
       // 初始化记录对象
-      recorder = new MediaRecorder(mediaStream)
+      mediaRecord = new MediaRecorder(media)
       // 停止回调
-      recorder.ondataavailable = (e) => {
+      mediaRecord.ondataavailable = (e) => {
         downloadElement.href = URL.createObjectURL(e.data)
         downloadElement.download = `camera-video-${new Date().toLocaleString().replace(/[/: ]/gi, '-')}.webm`
       }
       // 销毁
-      recorder.onstop = () => {
-        mediaStream.getTracks().forEach((track) => track.stop())
+      mediaRecord.onstop = () => {
+        media.getTracks().forEach((track) => track.stop())
       }
       // 开始
-      recorder.start()
+      mediaRecord.start()
       // 更改按钮内容
       recordElement.onclick = stopRecord
       recordElement.classList.replace('btn-b', 'btn-o')
@@ -140,7 +144,7 @@ const startRecord = () => {
 
 // 停止录制
 const stopRecord = () => {
-  recorder.stop()
+  mediaRecord.stop()
   // 按钮更改内容
   recordElement.onclick = startRecord
   recordElement.classList.replace('btn-o', 'btn-b')
@@ -176,7 +180,7 @@ const suspendVideo = () => {
 }
 
 // 退出
-const exit = () => {
+const toggleMedia = () => {
   if (mediaStart) {
     // 遍历并停止
     videoElement.srcObject.getTracks().forEach((v) => {

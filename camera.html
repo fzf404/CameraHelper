@@ -3,89 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <title>CameraHelper</title>
-    <style>
-      .container {
-        max-width: 100%;
-      }
-
-      .fr {
-        float: right;
-      }
-
-      button {
-        color: white;
-        font-size: 12px;
-        text-align: center;
-
-        display: inline-block;
-        cursor: pointer;
-
-        border: none;
-        padding: 8px 16px;
-        margin: 6px 2px;
-        border-radius: 4px;
-      }
-
-      select {
-        width: 200px;
-        height: 24px;
-        border-radius: 4px;
-        background: #f5f5f5;
-      }
-
-      .btn-g {
-        background-color: #1abc9c;
-      }
-
-      .btn-b {
-        background-color: #3498db;
-      }
-
-      .btn-o {
-        background-color: #e67e22;
-      }
-
-      .btn-p {
-        background-color: #9b59b6;
-      }
-
-      .btn-r {
-        background-color: #ff6b81;
-      }
-
-      .btn-d {
-        background-color: #57606f;
-      }
-
-      .disable {
-        background: #a4b0be;
-        cursor: not-allowed;
-        pointer-events: none;
-      }
-
-      .mirror {
-        transform: rotateY(180deg);
-      }
-
-      .hidden {
-        display: none;
-      }
-    </style>
+    <link rel="stylesheet" href="camera.css" />
   </head>
-
   <body>
-    <main class="container">
-      <nav>
-        <button id="photo" class="btn-g" onClick="takePhoto()">拍照</button>
-        <button id="record" class="btn-b" onClick="startRecord()">录像</button>
-        <button id="mirror" class="btn-r" onClick="mirrorVideo()">镜像</button>
-        <button id="suspend" class="btn-p" onClick="suspendVideo()">悬浮</button>
-        <select id="choice"></select>
-        <button id="change" class="btn-d" onClick="changeMedia()">切换</button>
-        <button id="exit" class="fr btn-r" onClick="exit()">解除/恢复占用</button>
-      </nav>
-      <video id="video" class="container"></video>
-      <a id="download" class="hidden">保存</a>
+    <nav>
+      <button id="photo" class="btn-g" onClick="takePhoto()">拍照</button>
+      <button id="record" class="btn-b" onClick="startRecord()">录像</button>
+      <button id="mirror" class="btn-r" onClick="mirrorVideo()">镜像</button>
+      <button id="suspend" class="btn-p" onClick="suspendVideo()">悬浮</button>
+      <select id="choice"></select>
+      <button id="change" class="btn-d" onClick="changeMedia()">切换</button>
+      <button id="toggle" class="fr btn-r" onClick="toggleMedia()">解除/恢复占用</button>
+    </nav>
+    <main>
+      <video id="video" class="container" autoplay></video>
+      <canvas id="canvas" class="hidden"></canvas>
+      <a id="download" class="hidden"></a>
     </main>
     <script src="camera.js"></script>
   </body>
