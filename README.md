@@ -6,7 +6,7 @@
 >
 > 适用于 win / linux
 
-![CameraHelper](https://https://img.fzf404.art/camerahelper/show.webp)
+![CameraHelper](https://img.fzf404.art/camerahelper/show.webp)
 
 ## ✨ 特性
 
